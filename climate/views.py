@@ -11,8 +11,17 @@ def index(request):
     is_private2 = request.POST.get('b', False)
     is_private3 = request.POST.get('c', False)
 
-    context = {"pais": is_private, "latitud": is_private2, "longitud": is_private3}
-
+    pol = requests.get(f"http://api.openweathermap.org/data/2.5/air_pollution?lat=19&lon=-99&appid={KEY}")
+    polu = pol.json()
+    co = polu["list"][0]["components"]["co"]
+    no = polu["list"][0]["components"]["no"]
+    no2 = polu["list"][0]["components"]["no2"]
+    o3 = polu["list"][0]["components"]["o3"]
+    so2 = polu["list"][0]["components"]["so2"]
+    pm2_5 = polu["list"][0]["components"]["pm2_5"]
+    pm10 = polu["list"][0]["components"]["pm10"]
+    context = {"pais": is_private, "latitud": is_private2, "longitud": is_private3,"co":co,"no":no,"no2":no2,"o3":o3,"so2":so2,"pm2_5":pm2_5,"pm10":pm10}
+    
 
     return render(request,'climate/index.html',context)
 
