@@ -1,1 +1,134 @@
-<h1>{{hola}}</h1>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Weather App</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link href="{% static 'climate/index.css' %}" rel="stylesheet" />
+<script src=""></script>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase " id="mainNav">
+  <div class="d-flex align-items-left flex-column">
+    <a class="btn btn-xl  text-light"  href="/">Home</a>
+  </div>
+  <div class="container d-flex align-items-center flex-column">
+    <h1  class="masthead-heading text-uppercase mb-0 text-light"> Longitud {{lon}}</h1>
+    <h1  class="masthead-heading text-uppercase mb-0 text-light"> Latitud {{lat}}</h1>
+  </div>
+</nav>
+
+<div class="container">
+ <div class="row">
+    
+    <div class="col-lg-12 d-flex align-items-center justify-content-center">
+    
+    </div>
+      <div class="card mb-3 " >
+            <div class="row g-0">
+                <div class="col-md-12">
+                <div class="card-body">
+                <div class=" d-flex align-items-center flex-column">
+                    <h1 class="card-title">General information</h1>
+                    <h3 class="card-text">Code of the country: {{code}}</h3>
+                    <h3 class="card-text">Sea level: {{sea}}</h3>
+                    <h3 class="card-text">Ground level: {{ground}} </h3>
+             
+                </div>
+
+                
+                </div>
+            </div>
+            </div>
+    </div>
+  <div class="row">
+    <div class="col">
+    <div class="col-lg-4 d-flex align-items-center justify-content-center">
+    
+    </div>
+      <div class="card mb-3 cardConfig" >
+            <div class="row g-0">
+                <div class="col-md-4">
+                <img class="myimage" src={% static 'climate/wea.png' %} alt="weather app">
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                <div class=" d-flex align-items-end flex-column">
+                    <h5 class="card-title">Weather</h5>
+                    <p class="card-text">Forecast: {{main}}</p>
+                    <p class="card-text">Description: {{desc}}</p>
+                    <p class="card-text">Temperature: {{temp}} C</p>
+                    <p class="card-text">Feels like: {{feels}} C</p>
+                    <p class="card-text">Min temperature: {{mini}} C</p>
+                    <p class="card-text">Max temperature: {{maxi}} C</p>
+                    <p class="card-text">Pressure: {{pressure}} Pa</p>
+                    <p class="card-text">Humidity: {{hum}}</p>                
+                </div>
+
+                </div>
+                </div>
+            </div>
+            </div>
+    </div>
+    <div class="col">
+            <div class="card mb-3 cardConfig">
+            <div class="row g-0">
+                <div class="col-md-4">
+                <img class="myimage" src={% static 'climate/wind.png' %} alt="weather app">
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                <div class=" d-flex align-items-end flex-column">
+                    <h5 class="card-title">Wind</h5>
+                    <p class="card-text">Speed wind: {{speed}} km/h</p>
+                    <p class="card-text">Degrees wind: {{degr}} </p>
+                </div>    
+                </div>
+                </div>
+            </div>
+            </div>
+    </div>
+  </div>
+    <div class="row">
+    <div class="col">
+            <div class="card mb-3 cardConfig">
+            <div class="row g-0">
+                <div class="col-md-4 myimage" >
+                <img class="myimage" src={% static 'climate/cloud.png' %} alt="weather app">
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                <div class=" d-flex align-items-end flex-column">
+                    <h5 class="card-title">Clouds</h5>
+                    <p class="card-text"><small class="text-muted">Quantity: {{clouds}}</small></p>
+                  </div>
+                </div>
+                </div>
+            </div>
+            </div>
+    </div>
+    <div class="col">
+            <div class="card mb-3 cardConfig">
+            <div class="row g-0">
+                <div class="col-md-4 myimage" >
+                <img class="myimage" src={% static 'climate/clock.jpg' %}  alt="weather app">
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                <div class=" d-flex align-items-end flex-column">
+                    <h5 class="card-title">Timezone</h5>
+                    <p class="card-text"><small class="text-muted">Timezone Mexico {{timezoneLocal}}</small></p>
+                    <p class="card-text"><small class="text-muted">Timezone {{country}} {{timezone}}</small></p>
+                  </div>  
+                </div>
+                </div>
+            </div>
+            </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

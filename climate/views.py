@@ -9,13 +9,15 @@ KEY = "3683e2c67de2c392420fe6f627158a2a"
 def index(request):
     is_private = request.POST.get('a', False)
     is_private2 = request.POST.get('b', False)
-    context = {"pais": is_private, "pais2": is_private2}
+    is_private3 = request.POST.get('c', False)
+
+    context = {"pais": is_private, "latitud": is_private2, "longitud": is_private3}
 
 
     return render(request,'climate/index.html',context)
 
 def weather(request, country):
-    weather = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={country}&units=metric&appid=3683{KEY}')
+    weather = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={country}&units=metric&appid={KEY}')
     weatherL = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q=MEXICO&units=metric&appid={KEY}')
     weatherLocal = weatherL.json()
     weatherMain = (weather.json())
@@ -37,9 +39,35 @@ def weather(request, country):
     return render(request, 'climate/weather.html', context)
 
 
-def days(request, country):
-    context={"hola":"alo"}
-    days = requests.get(f"https://api.openweathermap.org/data/2.5/forecast/daily?q={country}&units=metric&cnt=16&appid={KEY}")
+def days(request, latitud, longitud):
+    
+    days = requests.get(f"https://api.openweathermap.org/data/2.5/weather?lat={latitud}&lon={longitud}&appid={KEY}")
     da = days.json()
     print(da)
+    lon = da["coord"]["lon"]
+    lat = da["coord"]["lat"]
+    main = da["weather"][0]["main"]
+    desc = da["weather"][0]["description"]
+    temp = da["main"]["temp"]
+    feels = da["main"]["feels_like"]
+    mini = da["main"]["temp_min"]
+    maxi = da["main"]["temp_max"]
+    pressure = da["main"]["pressure"]
+    hum = da["main"]["humidity"]
+    speed = da["wind"]["speed"]
+    degr = da["wind"]["deg"]
+    clouds = da["clouds"]["all"]
+    timezone = ctime(da["timezone"])
+    timezoneLocal = ctime(da["timezone"])
+
+    try:
+        sea = da["main"]["sea_level"]
+        ground= da["main"]["grnd_level"]
+        code = da["sys"]["country"]
+    except:
+        sea = ""
+        ground = ""
+        code = ""
+
+    context={"code":code,"ground":ground,"sea":sea,"timezoneLocal":timezoneLocal,"timezone":timezone,"clouds":clouds,"degr":degr,"speed":speed,"lon":lon,"lat":lat,"main":main,"desc":desc,"temp":temp,"feels":feels,"mini":mini,"maxi":maxi,"pressure":pressure,"hum":hum}
     return render(request, 'climate/days.html', context)

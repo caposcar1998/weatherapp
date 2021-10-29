@@ -7,5 +7,5 @@ urlpatterns = [
 
 
     path('<str:country>/weather/', views.weather, name="weather"),
-    path('<str:country>/days/', views.days, name="days")
+    path('<int:latitud>/<int:longitud>/days/', views.days, name="days")
 ]
